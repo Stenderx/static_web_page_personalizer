@@ -1,23 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
 import Gallery from '../components/Gallery.astro';
+import Location from '../components/Location.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout title="Static Web Page Personalizer">
+<Layout title="Il Sapore Autentico | Authentic Italian Dining">
 	<main>
     <Hero />
-    <div id="gallery">
-      <Gallery />
-    </div>
+    <About />
+    <Location />
+    <Gallery />
 	</main>
   
   <footer class="site-footer">
-    <div class="container glass">
-      <p>&copy; {new Date().getFullYear()} Static Web Page Personalizer. Built for rapid Cloudflare deployment.</p>
+    <div class="container footer-content">
+      <div class="brand">
+        <h3>Il Sapore Autentico</h3>
+        <p>123 Culinary Avenue, Food District<br/>City, ST 12345</p>
+      </div>
+      <div class="hours">
+        <h4>Hours</h4>
+        <p>Mon-Thu: 5pm - 10pm<br/>Fri-Sun: 12pm - 11pm</p>
+      </div>
+      <div class="contact">
+        <h4>Contact</h4>
+        <p>reservations@ilsapore.com<br/>+1 (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; {new Date().getFullYear()} Il Sapore Autentico. All rights reserved.</p>
     </div>
   </footer>
 </Layout>
@@ -28,15 +43,43 @@ import Gallery from '../components/Gallery.astro';
   }
 
   .site-footer {
-    padding: 2rem;
-    text-align: center;
+    background: var(--card-bg);
+    padding: 4rem 0 2rem 0;
     margin-top: 4rem;
+    border-top: 1px solid var(--card-border);
   }
 
-  .site-footer .container {
-    padding: 1.5rem;
-    border-radius: 12px;
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-content h3 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .footer-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .footer-content p {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
   }
 </style>

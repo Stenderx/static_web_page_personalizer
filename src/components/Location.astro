@@ -1,0 +1,155 @@
+---
+import data from '../../assets/data.json';
+import { Image } from 'astro:assets';
+
+const images = import.meta.glob('../../assets/images/*.{jpeg,jpg,png,gif}');
+const content = data.location;
+
+const imagePath = `../../assets/images/${content.image}`;
+const imagePromise = images[imagePath];
+---
+
+<section class="location-section" id="location">
+  <div class="container location-grid">
+    <div class="location-images animate-fade-in">
+      <div class="img-wrapper glass">
+        {imagePromise && (
+          <Image src={imagePromise()} alt={content.title} />
+        )}
+      </div>
+    </div>
+    
+    <div class="location-content animate-fade-in" style="animation-delay: 0.2s;">
+      <span class="eyebrow">{content.eyebrow}</span>
+      <h2>{content.title}</h2>
+      {content.paragraphs.map(p => (
+        <p class="text-body">{p}</p>
+      ))}
+      
+      <div class="features">
+        {content.features.map(feature => (
+          <div class="feature-item">
+            <!-- Simplified Generic Feature icon mapping -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div>
+              <h4>{feature.title}</h4>
+              <p>{feature.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .location-section {
+    padding: 8rem 0;
+    background: var(--card-bg); /* Use slightly lighter dark backround to differentiate from about section */
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  /* Reverse order on mobile */
+  @media (max-width: 900px) {
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .location-images {
+      order: 2;
+    }
+    
+    .location-content {
+      order: 1;
+    }
+  }
+
+  .eyebrow {
+    color: var(--primary);
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+    font-style: italic;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .text-body {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .location-images {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    padding: 10px; /* To create a frame effect with glass class */
+  }
+  
+  .img-wrapper :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.6s ease;
+  }
+
+  .img-wrapper:hover :global(img) {
+    transform: scale(1.03);
+  }
+
+  .features {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .feature-icon {
+    flex-shrink: 0;
+    color: var(--primary);
+    margin-top: 0.2rem;
+  }
+
+  .feature-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-main);
+  }
+
+  .feature-item p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+</style>

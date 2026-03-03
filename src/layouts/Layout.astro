@@ -1,10 +1,15 @@
 ---
+import data from '../../assets/data.json';
+
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
 import '../styles/global.css';
+
+// Extract theme properties from JSON
+const { theme } = data.business;
 ---
 
 <!doctype html>
@@ -18,10 +23,33 @@ import '../styles/global.css';
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 		<title>{title}</title>
 	</head>
 	<body>
+    <!-- Inject CSS Custom Properties from JSON -->
+    <style define:vars={{
+      primary: theme.primary,
+      primaryHover: theme.primaryHover,
+      bgColor: theme.bgColor,
+      textMain: theme.textMain,
+      textMuted: theme.textMuted,
+      cardBg: theme.cardBg,
+      cardBorder: theme.cardBorder,
+      headingFont: theme.headingFont,
+    }}>
+      :root {
+        --primary: var(--primary);
+        --primary-hover: var(--primaryHover);
+        --bg-color: var(--bgColor);
+        --text-main: var(--textMain);
+        --text-muted: var(--textMuted);
+        --card-bg: var(--cardBg);
+        --card-border: var(--cardBorder);
+        --heading-font: var(--headingFont);
+      }
+    </style>
+    
     <div class="bg-gradient"></div>
 		<slot />
 	</body>
@@ -35,8 +63,8 @@ import '../styles/global.css';
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    background: radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.15), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+    background: radial-gradient(circle at 15% 50%, rgba(234, 88, 12, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(234, 88, 12, 0.05), transparent 25%);
     pointer-events: none;
   }
 </style>

@@ -1,0 +1,99 @@
+{
+    "business": {
+        "name": "Il Sapore Autentico",
+        "theme": {
+            "primary": "#ea580c",
+            "primaryHover": "#c2410c",
+            "bgColor": "#11100f",
+            "textMain": "#fafaf9",
+            "textMuted": "#a8a29e",
+            "cardBg": "#1c1917",
+            "cardBorder": "#292524",
+            "headingFont": "'Lora', serif"
+        },
+        "contact": {
+            "address": "123 Culinary Avenue, Food District\nCity, ST 12345",
+            "phone": "+1 (555) 123-4567",
+            "email": "reservations@ilsapore.com"
+        },
+        "hours": {
+            "weekdays": "Mon-Thu: 5pm - 10pm",
+            "weekends": "Fri-Sun: 12pm - 11pm"
+        }
+    },
+    "hero": {
+        "badge": "Est. 1994 • Autentico",
+        "headlineConfig": {
+            "line1": "Il Sapore",
+            "line2Highlight": "Autentico"
+        },
+        "subtitle": "A symphony of traditional Italian flavors crafted with passion and elegance. Experience dining at its finest.",
+        "buttons": [
+            {
+                "text": "Our Menu",
+                "link": "#menu",
+                "style": "primary"
+            },
+            {
+                "text": "Our Story",
+                "link": "#about",
+                "style": "outline"
+            }
+        ],
+        "image": "hero.png"
+    },
+    "about": {
+        "eyebrow": "La Nostra Storia",
+        "title": "A Tradition of Excellence",
+        "paragraphs": [
+            "Since 1994, Il Sapore Autentico has been bringing the warmth, passion, and vibrant flavors of traditional Italy to the heart of the city. We believe that food is not just nourishment, but a celebration of life, family, and heritage.",
+            "Our chefs carefully source the finest seasonal ingredients, combining classic recipes with refined modern techniques to create a dining experience you won't forget."
+        ],
+        "signature": {
+            "role": "Head Chef & Founder",
+            "name": "Marco Rossi"
+        },
+        "image": "pasta.png"
+    },
+    "location": {
+        "eyebrow": "Il Nostro Territorio",
+        "title": "Nestled in the Heart of the Historic Center",
+        "paragraphs": [
+            "Situated in a beautiful, centuries-old cobblestone piazza, Il Sapore Autentico offers an atmosphere that is as breathtaking as its cuisine. As the sun sets, casting a golden glow over the historic architecture, our outdoor seating area becomes the perfect place to enjoy an aperitivo.",
+            "The surrounding neighborhood is rich with history, local artisans, and breathtaking views, making a visit to our restaurant a complete cultural and sensory experience."
+        ],
+        "features": [
+            {
+                "title": "Historic Piazza",
+                "description": "Picturesque views of the old city."
+            },
+            {
+                "title": "Easy Parking",
+                "description": "Convenient access just a short walk away."
+            }
+        ],
+        "image": "location.png"
+    },
+    "gallery": {
+        "eyebrow": "Il Menù",
+        "title": "Culinary Masterpieces",
+        "description": "Explore a selection of our most beloved and authentic dishes.",
+        "items": [
+            {
+                "image": "pasta.png",
+                "title": "Tartufo Bianco",
+                "description": "Handmade tagliolini, fresh white truffle, parmigiano reggiano."
+            },
+            {
+                "image": "pizza.png",
+                "title": "Margherita Verace",
+                "description": "San Marzano tomatoes, fresh mozzarella di bufala, basil, olive oil."
+            },
+            {
+                "image": "dessert.png",
+                "title": "Tiramisù Classico",
+                "description": "Mascarpone, espresso-soaked ladyfingers, rich cocoa."
+            }
+        ]
+    }
+}

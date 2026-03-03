@@ -1,35 +1,50 @@
 ---
+import data from '../../assets/data.json';
+import { Image } from 'astro:assets';
+
+// Import all images from the assets folder using glob
+const images = import.meta.glob('../../assets/images/*.{jpeg,jpg,png,gif}');
+// Helper to find the correct image promise for the hero
+const heroImagePath = `../../assets/images/${data.hero.image}`;
+const heroImagePromise = images[heroImagePath];
+
+// Extract hero copy
+const { badge, headlineConfig, subtitle, buttons } = data.hero;
 ---
 
 <header class="hero-section">
+  {heroImagePromise && (
+    <div class="hero-bg">
+      <Image src={heroImagePromise()} alt="Hero Background" layout="fill" objectFit="cover" quality={80} />
+    </div>
+  )}
+  <div class="hero-overlay"></div>
   <div class="hero-content container">
-    <div class="badge animate-fade-in glass">
-      <span>✨ Now supporting Cloudflare Pages</span>
+    <div class="badge animate-fade-in">
+      <span>{badge}</span>
     </div>
     
     <h1 class="animate-fade-in" style="animation-delay: 0.1s;">
-      Build Beautiful <br/>
-      <span class="gradient-text">Static Experiences</span>
+      {headlineConfig.line1} <br/>
+      <span class="text-primary italic">{headlineConfig.line2Highlight}</span>
     </h1>
     
     <p class="subtitle animate-fade-in" style="animation-delay: 0.2s;">
-      The perfect aesthetic starting point for your dynamic image galleries and business landing pages. Fast, accessible, and stunning.
+      {subtitle}
     </p>
 
     <div class="cta-buttons animate-fade-in" style="animation-delay: 0.3s;">
-      <a href="#gallery" class="btn btn-primary glass">View Gallery</a>
-      <a href="https://developers.cloudflare.com/pages/" target="_blank" class="btn btn-secondary glass">Deploy Docs</a>
+      {buttons.map((btn) => (
+        <a href={btn.link} class={`btn btn-${btn.style}`}>{btn.text}</a>
+      ))}
     </div>
   </div>
-  
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
 </header>
 
 <style>
   .hero-section {
     position: relative;
-    min-height: 80vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,6 +53,26 @@
     padding: 6rem 0;
   }
   
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+  }
+  
+  .hero-bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Dark gradient overlay to ensure text readability */
+    background: linear-gradient(to bottom, rgba(17, 16, 15, 0.4), rgba(17, 16, 15, 0.95));
+    z-index: 1;
+  }
+
   .hero-content {
     position: relative;
     z-index: 10;
@@ -47,24 +82,31 @@
   }
 
   .badge {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-family: var(--heading-font);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     margin-bottom: 2rem;
-    color: var(--text-muted);
+    color: var(--primary);
   }
 
   h1 {
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: clamp(3.5rem, 8vw, 6rem);
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
+    line-height: 1.1;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, #60a5fa, #c084fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .text-primary {
+    color: var(--primary);
+  }
+  
+  .italic {
+    font-style: italic;
+    font-weight: 400;
   }
 
   .subtitle {
@@ -76,62 +118,8 @@
 
   .cta-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 0.875rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary {
-    background: rgba(37, 99, 235, 0.8);
-    border-color: rgba(96, 165, 250, 0.5);
-  }
-
-  .btn-primary:hover {
-    background: rgba(37, 99, 235, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
-  }
-
-  .btn-secondary {
-    background: rgba(30, 41, 59, 0.5);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(30, 41, 59, 0.8);
-    transform: translateY(-2px);
-  }
-
-  .glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
-    z-index: 1;
-    animation: drift 10s infinite alternate ease-in-out;
-  }
-
-  .orb-1 {
-    top: -10%; left: 20%;
-    width: 400px; height: 400px;
-    background: rgba(37, 99, 235, 0.4);
-  }
-
-  .orb-2 {
-    bottom: -10%; right: 20%;
-    width: 300px; height: 300px;
-    background: rgba(192, 132, 252, 0.3);
-    animation-delay: -5s;
-  }
-
-  @keyframes drift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(30px, -50px); }
   }
 </style>

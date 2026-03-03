@@ -1,42 +1,50 @@
 ---
-// A simple reusable gallery component using CSS Grid and our glassmorphism styles
+const galleryItems = [
+  {
+    image: "/images/pasta.png",
+    title: "Tartufo Bianco",
+    description: "Handmade tagliolini, fresh white truffle, parmigiano reggiano."
+  },
+  {
+    image: "/images/pizza.png",
+    title: "Margherita Verace",
+    description: "San Marzano tomatoes, fresh mozzarella di bufala, basil, olive oil."
+  },
+  {
+    image: "/images/dessert.png",
+    title: "Tiramisù Classico",
+    description: "Mascarpone, espresso-soaked ladyfingers, rich cocoa."
+  }
+];
 ---
 
-<section class="gallery-section container">
+<section class="gallery-section container" id="menu">
   <div class="gallery-header animate-fade-in">
-    <h2>Discover Our Work</h2>
-    <p class="text-muted">Explore some of our latest projects and creations.</p>
+    <span class="eyebrow">Il Menù</span>
+    <h2>Culinary Masterpieces</h2>
+    <p class="text-muted">Explore a selection of our most beloved and authentic dishes.</p>
   </div>
   
   <div class="gallery-grid">
-    <!-- Placeholder images that look premium -->
-    <div class="gallery-item glass">
-      <div class="img-wrapper"></div>
-      <div class="item-content">
-        <h3>Project Alpha</h3>
-        <p>A stunning visual experience designed to captivate.</p>
+    {galleryItems.map((item, index) => (
+      <div class="gallery-item" style={`animation-delay: ${index * 0.15}s;`}>
+        <div class="img-wrapper">
+          <img src={item.image} alt={item.title} loading="lazy" />
+          <div class="overlay">
+            <div class="overlay-content">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="gallery-item glass" style="animation-delay: 0.1s;">
-      <div class="img-wrapper"></div>
-      <div class="item-content">
-        <h3>Project Beta</h3>
-        <p>Modern architecture meeting natural aesthetics.</p>
-      </div>
-    </div>
-    <div class="gallery-item glass" style="animation-delay: 0.2s;">
-      <div class="img-wrapper"></div>
-      <div class="item-content">
-        <h3>Project Gamma</h3>
-        <p>Sleek and polished interfaces with vibrant colors.</p>
-      </div>
-    </div>
+    ))}
   </div>
 </section>
 
 <style>
   .gallery-section {
-    padding: 6rem 2rem;
+    padding: 6rem 0;
   }
   
   .gallery-header {
@@ -44,16 +52,21 @@
     margin-bottom: 4rem;
   }
   
+  .eyebrow {
+    color: var(--primary);
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+    font-style: italic;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
   .gallery-header h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(to right, var(--text-main), var(--text-muted));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
   
   .text-muted {
-    color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -61,59 +74,74 @@
 
   .gallery-grid {
     display: grid;
+    /* 3 columns on desktop, 1 on mobile */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
 
   .gallery-item {
-    border-radius: 16px;
+    border-radius: 4px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeIn 0.8s ease-out forwards;
     opacity: 0;
   }
 
-  .gallery-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
   .img-wrapper {
-    height: 200px;
-    width: 100%;
-    /* A premium gradient placeholder */
-    background: linear-gradient(135deg, var(--card-bg), var(--card-border));
     position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
     overflow: hidden;
   }
   
-  .img-wrapper::after {
-    content: '';
+  .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .img-wrapper:hover img {
+    transform: scale(1.08);
+  }
+
+  .overlay {
     position: absolute;
-    top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-    transform: skewX(-20deg);
-    animation: shine 3s infinite;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(17,16,15,0.95) 0%, rgba(17,16,15,0.4) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
   }
 
-  .item-content {
-    padding: 1.5rem;
+  .img-wrapper:hover .overlay {
+    opacity: 1;
   }
 
-  .item-content h3 {
-    font-size: 1.25rem;
+  .overlay-content h3 {
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
   }
 
-  .item-content p {
+  .overlay-content p {
     color: var(--text-muted);
     font-size: 0.95rem;
+    line-height: 1.5;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.1s;
   }
 
-  @keyframes shine {
-    0% { left: -100%; }
-    20% { left: 200%; }
-    100% { left: 200%; }
+  .img-wrapper:hover .overlay-content h3,
+  .img-wrapper:hover .overlay-content p {
+    transform: translateY(0);
+  }
+
+  .menu-cta {
+    text-align: center;
+    margin-top: 5rem;
   }
 </style>
