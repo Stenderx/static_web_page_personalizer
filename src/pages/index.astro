@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Static Web Page Personalizer">
+	<main>
+    <Hero />
+    <div id="gallery">
+      <Gallery />
+    </div>
+	</main>
+  
+  <footer class="site-footer">
+    <div class="container glass">
+      <p>&copy; {new Date().getFullYear()} Static Web Page Personalizer. Built for rapid Cloudflare deployment.</p>
+    </div>
+  </footer>
 </Layout>
+
+<style>
+  main {
+    width: 100%;
+  }
+
+  .site-footer {
+    padding: 2rem;
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .site-footer .container {
+    padding: 1.5rem;
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>
