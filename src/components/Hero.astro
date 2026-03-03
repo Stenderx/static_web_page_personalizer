@@ -1,42 +1,29 @@
 ---
-import data from '../../assets/data.json';
-import { Image } from 'astro:assets';
-
-// Import all images from the assets folder using glob
-const images = import.meta.glob('../../assets/images/*.{jpeg,jpg,png,gif}');
-// Helper to find the correct image promise for the hero
-const heroImagePath = `../../assets/images/${data.hero.image}`;
-const heroImagePromise = images[heroImagePath];
-
-// Extract hero copy
-const { badge, headlineConfig, subtitle, buttons } = data.hero;
 ---
 
 <header class="hero-section">
-  {heroImagePromise && (
-    <div class="hero-bg">
-      <Image src={heroImagePromise()} alt="Hero Background" layout="fill" objectFit="cover" quality={80} />
-    </div>
-  )}
+  <div class="hero-bg">
+    <!-- Base template expects hero.png in assets/images -->
+    <img src="/_astro/hero.png" alt="Hero Background" />
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content container">
     <div class="badge animate-fade-in">
-      <span>{badge}</span>
+      <span>Est. 1994 &bull; Autentico</span>
     </div>
     
     <h1 class="animate-fade-in" style="animation-delay: 0.1s;">
-      {headlineConfig.line1} <br/>
-      <span class="text-primary italic">{headlineConfig.line2Highlight}</span>
+      Il Sapore <br/>
+      <span class="text-primary italic">Autentico</span>
     </h1>
     
     <p class="subtitle animate-fade-in" style="animation-delay: 0.2s;">
-      {subtitle}
+      A symphony of traditional Italian flavors crafted with passion and elegance. Experience dining at its finest.
     </p>
 
     <div class="cta-buttons animate-fade-in" style="animation-delay: 0.3s;">
-      {buttons.map((btn) => (
-        <a href={btn.link} class={`btn btn-${btn.style}`}>{btn.text}</a>
-      ))}
+      <a href="#menu" class="btn btn-primary">Our Menu</a>
+      <a href="#about" class="btn btn-outline">Our Story</a>
     </div>
   </div>
 </header>
@@ -59,7 +46,7 @@ const { badge, headlineConfig, subtitle, buttons } = data.hero;
     z-index: 0;
   }
   
-  .hero-bg :global(img) {
+  .hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;

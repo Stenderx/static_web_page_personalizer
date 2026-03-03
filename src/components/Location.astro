@@ -1,42 +1,41 @@
 ---
-import data from '../../assets/data.json';
-import { Image } from 'astro:assets';
-
-const images = import.meta.glob('../../assets/images/*.{jpeg,jpg,png,gif}');
-const content = data.location;
-
-const imagePath = `../../assets/images/${content.image}`;
-const imagePromise = images[imagePath];
 ---
 
 <section class="location-section" id="location">
   <div class="container location-grid">
     <div class="location-images animate-fade-in">
       <div class="img-wrapper glass">
-        {imagePromise && (
-          <Image src={imagePromise()} alt={content.title} />
-        )}
+        <img src="/_astro/location.png" alt="Our charming piazza at sunset" loading="lazy" />
       </div>
     </div>
     
     <div class="location-content animate-fade-in" style="animation-delay: 0.2s;">
-      <span class="eyebrow">{content.eyebrow}</span>
-      <h2>{content.title}</h2>
-      {content.paragraphs.map(p => (
-        <p class="text-body">{p}</p>
-      ))}
+      <span class="eyebrow">Il Nostro Territorio</span>
+      <h2>Nestled in the Heart of the Historic Center</h2>
+      <p class="text-body">
+        Situated in a beautiful, centuries-old cobblestone piazza, Il Sapore Autentico offers an atmosphere that is as breathtaking as its cuisine. As the sun sets, casting a golden glow over the historic architecture, our outdoor seating area becomes the perfect place to enjoy an aperitivo.
+      </p>
+      <p class="text-body">
+        The surrounding neighborhood is rich with history, local artisans, and breathtaking views, making a visit to our restaurant a complete cultural and sensory experience.
+      </p>
       
       <div class="features">
-        {content.features.map(feature => (
-          <div class="feature-item">
-            <!-- Simplified Generic Feature icon mapping -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <div>
-              <h4>{feature.title}</h4>
-              <p>{feature.description}</p>
-            </div>
+        <div class="feature-item">
+          <!-- Generic icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div>
+            <h4>Historic Piazza</h4>
+            <p>Picturesque views of the old city.</p>
           </div>
-        ))}
+        </div>
+        <div class="feature-item">
+          <!-- Generic icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feature-icon"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div>
+            <h4>Easy Parking</h4>
+            <p>Convenient access just a short walk away.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -109,7 +108,7 @@ const imagePromise = images[imagePath];
     padding: 10px; /* To create a frame effect with glass class */
   }
   
-  .img-wrapper :global(img) {
+  .img-wrapper img {
     width: 100%;
     height: auto;
     display: block;
@@ -119,7 +118,7 @@ const imagePromise = images[imagePath];
     transition: transform 0.6s ease;
   }
 
-  .img-wrapper:hover :global(img) {
+  .img-wrapper:hover img {
     transform: scale(1.03);
   }
 

@@ -1,4 +1,17 @@
-/* CSS Variables are now dynamically injected via Layout.astro from assets/data.json */
+:root {
+  --primary: #ea580c;
+  /* Default Warm Orange */
+  --primary-hover: #c2410c;
+  --bg-color: #11100f;
+  /* Very deep warm neutral */
+  --text-main: #fafaf9;
+  /* Warm off-white */
+  --text-muted: #a8a29e;
+  --card-bg: #1c1917;
+  --card-border: #292524;
+  --heading-font: 'Lora', serif;
+  /* Default Elegant Serif */
+}
 
 * {
   box-sizing: border-box;

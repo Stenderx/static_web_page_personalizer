@@ -2,13 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
-import Gallery from '../components/Gallery.astro';
 import Location from '../components/Location.astro';
+import Gallery from '../components/Gallery.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+const currentYear = new Date().getFullYear();
 ---
 
-<Layout title="Il Sapore Autentico | Authentic Italian Dining">
+<Layout title="Il Sapore Autentico | Authentic Dining">
 	<main>
     <Hero />
     <About />
@@ -32,7 +32,7 @@ import Location from '../components/Location.astro';
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; {new Date().getFullYear()} Il Sapore Autentico. All rights reserved.</p>
+      <p>&copy; {currentYear} Il Sapore Autentico. All rights reserved.</p>
     </div>
   </footer>
 </Layout>
@@ -60,6 +60,7 @@ import Location from '../components/Location.astro';
     font-size: 1.5rem;
     color: var(--primary);
     margin-bottom: 1rem;
+    font-family: var(--heading-font);
   }
 
   .footer-content h4 {

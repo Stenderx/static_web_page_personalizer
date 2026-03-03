@@ -1,34 +1,28 @@
 ---
-import data from '../../assets/data.json';
-import { Image } from 'astro:assets';
-
-const images = import.meta.glob('../../assets/images/*.{jpeg,jpg,png,gif}');
-const content = data.about;
-
-const imagePath = `../../assets/images/${content.image}`;
-const imagePromise = images[imagePath];
 ---
 
 <section class="about-section" id="about">
   <div class="container layout-grid">
     <div class="about-content animate-fade-in">
-      <span class="eyebrow">{content.eyebrow}</span>
-      <h2>{content.title}</h2>
-      {content.paragraphs.map(p => (
-        <p class="text-body">{p}</p>
-      ))}
+      <span class="eyebrow">La Nostra Storia</span>
+      <h2>A Tradition of Excellence</h2>
+      <p class="text-body">
+        Since 1994, Il Sapore Autentico has been bringing the warmth, passion, and vibrant flavors of traditional Italy to the heart of the city. We believe that food is not just nourishment, but a celebration of life, family, and heritage.
+      </p>
+      <p class="text-body">
+        Our chefs carefully source the finest seasonal ingredients, combining classic recipes with refined modern techniques to create a dining experience you won't forget.
+      </p>
       <div class="signature">
-        <p>{content.signature.role}</p>
-        <span class="name">{content.signature.name}</span>
+        <p>Head Chef & Founder</p>
+        <span class="name">Marco Rossi</span>
       </div>
     </div>
 
     <!-- Right side decorative elements -->
     <div class="about-images animate-fade-in" style="animation-delay: 0.2s;">
       <div class="img-wrapper highlight glass">
-        {imagePromise && (
-          <Image src={imagePromise()} alt={content.title} />
-        )}
+        <!-- Base template expects pasta.png in assets/images -->
+        <img src="/_astro/pasta.png" alt="Signature Dish" loading="lazy" />
       </div>
     </div>
   </div>
@@ -110,7 +104,7 @@ const imagePromise = images[imagePath];
     position: relative;
   }
   
-  .img-wrapper :global(img) {
+  .img-wrapper img {
     width: 100%;
     height: auto;
     display: block;
@@ -119,7 +113,7 @@ const imagePromise = images[imagePath];
     transition: transform 0.6s ease;
   }
 
-  .img-wrapper:hover :global(img) {
+  .img-wrapper:hover img {
     transform: scale(1.05);
   }
 
